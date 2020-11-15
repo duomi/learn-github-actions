@@ -26,7 +26,6 @@ jobs:
           mkdir public
           cd public
           npm install hexo
-          npx hexo init
           npm install
       -
         name: Deploy to GitHub Pages
