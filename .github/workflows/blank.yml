@@ -27,6 +27,7 @@ jobs:
           cd public
           npm install hexo
           npm install
+          npx hexo g
       -
         name: Deploy to GitHub Pages
         if: success()
@@ -37,4 +38,3 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
-          BUILD_SCRIPT: npx hexo g
