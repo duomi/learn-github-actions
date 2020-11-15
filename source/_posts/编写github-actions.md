@@ -31,8 +31,13 @@ jobs:
       - uses: actions/checkout@v2
 
       -
-        name: Make public directory
-        run: mkdir public
+        name: environment create
+        run: |
+          mkdir public
+          cd public
+          npm install hexo
+          npm install
+          npx hexo g
       -
         name: Deploy to GitHub Pages
         if: success()
@@ -40,6 +45,8 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: public
+
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
+
 ```
