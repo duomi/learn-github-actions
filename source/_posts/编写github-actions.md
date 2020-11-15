@@ -1,0 +1,45 @@
+---
+title: 编写github actions
+date: 2020-11-15 17:52:56
+tags:
+---
+
+
+代码是参考[阮一峰](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)老师写的教程改的。
+<!-- more -->
+``` 
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  push:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      -
+        name: Make public directory
+        run: mkdir public
+      -
+        name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: public
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
+```
